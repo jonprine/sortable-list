@@ -78,12 +78,28 @@ function dragDrop() {
     this.classList.remove('over');
 }
 
+// swap list items that are drag and drop
 function swapItems(fromIndex, toIndex) {
    const itemOne = listItems[fromIndex].querySelector('.draggable');
    const itemTwo = listItems[toIndex].querySelector('.draggable');
 
    listItems[fromIndex].appendChild(itemTwo);
    listItems[toIndex].appendChild(itemOne);
+}
+
+// check the order of list items
+function checkOrder() {
+    listItems.forEach((listItem, index) => {
+        const personName = listItem.querySelector('.draggable')
+        .innerText.trim();
+
+        if(personName !== favFilmakers[index]) {
+            listItem.classList.add('wrong');
+        } else {
+            listItem.classList.remove('wrong');
+            listItem.classList.add('right');
+        }
+    });
 }
 
 
@@ -102,3 +118,5 @@ function addEventListeners() {
         item.addEventListener('dragleave', dragleave);
     });
 }
+
+check.addEventListener('click', checkOrder);
